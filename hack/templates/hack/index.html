@@ -1,0 +1,49 @@
+{% extends 'hack/base.html' %}
+{% block ranks_active %}active{% endblock %}
+
+{% block content %}
+<div class="departments-container container-fluid">
+
+    <!-- user -->
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <p>Welcome {{ user.username }}</p>
+        </div>
+    </div>
+    <div class="container text-center">
+    <div class="row">
+      <h2>Hack List</h2>
+      <hr>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-xs-12" style="margin-top:20px;">
+  {% if projects %}
+  <table class="table table-bordered table-hover table-striped table-foldersystem">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Project Name</th>
+        <th>Team Name</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for project in projects %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ project.date }}</td>
+        <td>{{ project.project }}</td>
+        <td>{{ project.team_name }}</td>
+        <td>{{ project.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center;"> No projects available.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

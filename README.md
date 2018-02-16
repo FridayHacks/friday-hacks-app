@@ -1,1 +1,1 @@
-# friday-hacks-app
+# Friday Hacks App
