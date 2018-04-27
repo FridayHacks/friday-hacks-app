@@ -12,21 +12,32 @@
     </div>
     <div class="container text-center">
     <div class="row">
-      <h2>Hack List</h2>
+      <h2>Friday Hacks</h2>
       <hr>
     </div>
+    <a href="{% url 'hack:propose' %}"><button type="button" class="btn btn-default btn-lg active"><i class="fa fa-lightbulb" aria-hidden="true"></i> Propose</button></a>
+    <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-users" aria-hidden="true"></i> Teams</button>
   </div>
 
+
   <div class="col-md-12 col-xs-12" style="margin-top:20px;">
-  {% if projects %}
+  <h3>Project List</h3>
+      {% if message %}
+       <p>{{ message }}</p>
+      {% endif %}
+
+      {% if projects %}
   <table class="table table-bordered table-hover table-striped table-foldersystem">
     <thead>
       <tr>
         <th>#</th>
         <th>Date</th>
-        <th>Project Name</th>
-        <th>Team Name</th>
+        <th>Project Title</th>
+        <th>Team Description</th>
+        <th>Proposed by</th>
         <th>Status</th>
+        <th>Votes</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -34,9 +45,12 @@
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ project.date }}</td>
-        <td>{{ project.project }}</td>
-        <td>{{ project.team_name }}</td>
+        <td>{{ project.project_title }}</td>
+        <td>{{ project.project_description }}</td>
+        <td>{{ project.proposed_by }}</td>
         <td>{{ project.status }}</td>
+        <td>{{ project.votes }}</td>
+        <td></td>
       </tr>
       {% endfor %}
     </tbody>

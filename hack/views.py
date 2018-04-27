@@ -8,20 +8,19 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Team, Project, Rank
 from .forms import UserForm
+from .models import Project
 from .serializers import ProjectSerializer
+from datetime import datetime
 
 def index(request):
     if not request.user.is_authenticated():
         return render(request, 'hack/login.html')
     else:
         projects = Project.objects.all()
-        teams = Team.objects.all()
-        ranks = Rank.objects.all()
         return render(request, 'hack/index.html', {
-                'projects': projects,
-                'teams': teams,
-                'ranks': ranks
+                'projects': projects
         })
+
 
 def logout_user(request):
     logout(request)
@@ -69,13 +68,45 @@ def signup(request):
     return render(request, 'hack/signup.html', context)
 
 
-
-def projects(request):
+def propose(request):
 
     if not request.user.is_authenticated():
         return render(request, 'hack/login.html')
     else:
-        return render(request, 'hack/projects.html')
+        return render(request, 'hack/propose.html')
+
+
+def propose_project(request):
+
+    if request.method == 'POST':
+        project_title = request.POST['title']
+        project_description = request.POST['description']
+        proposed_by = request.user
+        date = datetime.now()
+        status = "Proposed"
+        votes = 0
+
+        project = Project(project_title=project_title,
+                        project_description=project_description,
+                        proposed_by=proposed_by,
+                        status=status,
+                        date=date,
+                        votes=votes)
+        project.save()
+        projects = Project.objects.all()
+        context = {
+            'message': 'Success. Project Proposed!',
+            'color': 'green',
+            'projects' : projects
+        }
+        return render(request, 'hack/index.html', context)
+    context = {
+            'message': 'Error. Try again.',
+            'color': 'red',
+        }
+    return render(request, 'hack/index.html', context)
+
+
 
 def teams(request):
 

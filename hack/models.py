@@ -12,12 +12,15 @@ class Team(models.Model):
 	def __str__(self):
 		return self.team
 
+
 class Project(models.Model):
 	id = models.AutoField(primary_key=True)
-	project = models.CharField(max_length=255)
-	team_name = models.ForeignKey(Team, on_delete=models.CASCADE, default=None)
+	project_title = models.CharField(max_length=255)
+	project_description = models.TextField(default=None)
+	proposed_by = models.CharField(max_length=255,default=None)
 	status = models.CharField(max_length=50)
 	date = models.DateField(auto_now_add=True)
+	votes = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.project
