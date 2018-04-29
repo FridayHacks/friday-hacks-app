@@ -15,8 +15,21 @@
       <h2>Friday Hacks</h2>
       <hr>
     </div>
-    <a href="{% url 'hack:propose' %}"><button type="button" class="btn btn-default btn-lg active"><i class="fa fa-lightbulb" aria-hidden="true"></i> Propose</button></a>
-    <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-users" aria-hidden="true"></i> Teams</button>
+    <a href="{% url 'hack:propose' %}">
+        <button type="button" class="btn btn-default btn-lg active">
+            <i class="fa fa-plus" aria-hidden="true"></i> Propose
+        </button>
+    </a>
+    <a href="{% url 'hack:form_teams' %}">
+        <button type="button" class="btn btn-default btn-lg active">
+            <i class="fa fa-users" aria-hidden="true"></i> Teams
+        </button>
+    </a>
+    <a href="{% url 'hack:show_ranks' %}">
+        <button type="button" class="btn btn-default btn-lg active">
+            <i class="fa fa-list-ol" aria-hidden="true"></i> Ranks
+        </button>
+    </a>
   </div>
 
 
@@ -33,11 +46,11 @@
         <th>#</th>
         <th>Date</th>
         <th>Project Title</th>
-        <th>Team Description</th>
+        <th>Project Description</th>
         <th>Proposed by</th>
         <th>Status</th>
-        <th>Votes</th>
-        <th></th>
+        <th># Votes</th>
+        <th>Vote</th>
       </tr>
     </thead>
     <tbody>
@@ -50,7 +63,14 @@
         <td>{{ project.proposed_by }}</td>
         <td>{{ project.status }}</td>
         <td>{{ project.votes }}</td>
-        <td></td>
+        <td>
+            <a href="{% url 'hack:form_teams' %}">
+                <button type="button" class="btn btn-default">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                </button>
+            </a>
+        </td>
+
       </tr>
       {% endfor %}
     </tbody>

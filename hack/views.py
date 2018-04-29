@@ -107,14 +107,20 @@ def propose_project(request):
     return render(request, 'hack/index.html', context)
 
 
-
-def teams(request):
+def form_teams(request):
 
     if not request.user.is_authenticated():
         return render(request, 'hack/login.html')
     else:
         return render(request, 'hack/teams.html')
 
+
+def show_ranks(request):
+
+    if not request.user.is_authenticated():
+        return render(request, 'hack/login.html')
+    else:
+        return render(request, 'hack/ranks.html')
 
 class ProjectList(APIView):
 
